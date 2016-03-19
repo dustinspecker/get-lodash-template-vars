@@ -10,7 +10,12 @@
     "test": "npm run lint && npm run compile && nyc ava"
   },
   "repository": "dustinspecker/get-lodash-template-vars",
-  "keywords": [],
+  "keywords": [
+    "lodash",
+    "template",
+    "variables",
+    "vars"
+  ],
   "author": {
     "name": "Dustin Specker",
     "email": "DustinSpecker@DustinSpecker.com",
