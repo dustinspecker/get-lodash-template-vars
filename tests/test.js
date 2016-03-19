@@ -41,6 +41,14 @@ test('it should retrieve escaped vars', t => {
   t.same(threeVarsWithSpaces, ['hello', 'bye', 'world'])
 })
 
+test('it should retrieve vars from truthy conditions', t => {
+  const ifVarWithoutSpaces = getLodashTemplateVars('<%if(name){%>')
+  const ifVarWithSpaces = getLodashTemplateVars('<% if ( name ) { %>')
+
+  t.same(ifVarWithoutSpaces, ['name'])
+  t.same(ifVarWithSpaces, ['name'])
+})
+
 test('it should remove duplicates', t => {
   const twoUniques = getLodashTemplateVars('<%=hello%><%=bye%><%-bye%><%=hello%>')
 

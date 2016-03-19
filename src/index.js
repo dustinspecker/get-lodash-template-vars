@@ -15,10 +15,10 @@ module.exports = template => {
 
   /* eslint-disable no-inline-comments */
   const pattern = [
-    '<%[=|-]', // look for opening tag (<%= or <%-)
-    '[\\s]*', // accept any space after opening tag and before identifier
+    '<%[=|-]?', // look for opening tag (<%, <%=, or <%-)
+    '(?:[\\s]|if|\\()*', // accept any space after opening tag and before identifier
     '(.+?)', // capture the identifier name (`hello` in <%= hello %>)
-    '[\\s]*', // accept any space after identifier and before closing tag
+    '(?:[\\s]|\\)|\\{)*', // accept any space after identifier and before closing tag
     '%>' // look for closing tag
   ].join('')
   /* eslint-enable no-inline-comments */
