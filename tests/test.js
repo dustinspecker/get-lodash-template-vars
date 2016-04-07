@@ -9,8 +9,8 @@ test('it should throw an error if template is not a string', t => {
 })
 
 test('it should return an empty array if template has no vars', t => {
-  t.same(getLodashTemplateVars(''), [])
-  t.same(getLodashTemplateVars('hello'), [])
+  t.deepEqual(getLodashTemplateVars(''), [])
+  t.deepEqual(getLodashTemplateVars('hello'), [])
 })
 
 test('it should retrieve interpolated vars', t => {
@@ -20,11 +20,11 @@ test('it should retrieve interpolated vars', t => {
   const threeVarsWithoutSpaces = getLodashTemplateVars('<%=hello%><%=bye%><%=world%>')
   const threeVarsWithSpaces = getLodashTemplateVars('<%= hello %><%= bye %><%= world %>')
 
-  t.same(oneVarWithoutSpaces, ['hello'])
-  t.same(oneVarWithSpaces, ['hello'])
-  t.same(twoVarsMixedSpacing, ['hello', 'bye'])
-  t.same(threeVarsWithoutSpaces, ['hello', 'bye', 'world'])
-  t.same(threeVarsWithSpaces, ['hello', 'bye', 'world'])
+  t.deepEqual(oneVarWithoutSpaces, ['hello'])
+  t.deepEqual(oneVarWithSpaces, ['hello'])
+  t.deepEqual(twoVarsMixedSpacing, ['hello', 'bye'])
+  t.deepEqual(threeVarsWithoutSpaces, ['hello', 'bye', 'world'])
+  t.deepEqual(threeVarsWithSpaces, ['hello', 'bye', 'world'])
 })
 
 test('it should retrieve escaped vars', t => {
@@ -34,23 +34,23 @@ test('it should retrieve escaped vars', t => {
   const threeVarsWithoutSpaces = getLodashTemplateVars('<%-hello%><%-bye%><%-world%>')
   const threeVarsWithSpaces = getLodashTemplateVars('<%- hello %><%- bye %><%- world %>')
 
-  t.same(oneVarWithoutSpaces, ['hello'])
-  t.same(oneVarWithSpaces, ['hello'])
-  t.same(twoVarsMixedSpacing, ['hello', 'bye'])
-  t.same(threeVarsWithoutSpaces, ['hello', 'bye', 'world'])
-  t.same(threeVarsWithSpaces, ['hello', 'bye', 'world'])
+  t.deepEqual(oneVarWithoutSpaces, ['hello'])
+  t.deepEqual(oneVarWithSpaces, ['hello'])
+  t.deepEqual(twoVarsMixedSpacing, ['hello', 'bye'])
+  t.deepEqual(threeVarsWithoutSpaces, ['hello', 'bye', 'world'])
+  t.deepEqual(threeVarsWithSpaces, ['hello', 'bye', 'world'])
 })
 
 test('it should retrieve vars from truthy conditions', t => {
   const ifVarWithoutSpaces = getLodashTemplateVars('<%if(name){%>')
   const ifVarWithSpaces = getLodashTemplateVars('<% if ( name ) { %>')
 
-  t.same(ifVarWithoutSpaces, ['name'])
-  t.same(ifVarWithSpaces, ['name'])
+  t.deepEqual(ifVarWithoutSpaces, ['name'])
+  t.deepEqual(ifVarWithSpaces, ['name'])
 })
 
 test('it should remove duplicates', t => {
   const twoUniques = getLodashTemplateVars('<%=hello%><%=bye%><%-bye%><%=hello%>')
 
-  t.same(twoUniques, ['hello', 'bye'])
+  t.deepEqual(twoUniques, ['hello', 'bye'])
 })
